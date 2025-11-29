@@ -52,10 +52,15 @@ public:
         y = _y;
     }
 
-    float getHorizontalSpeed(const float frameTime) {
+    [[nodiscard]] float getHorizontalSpeed(const float frameTime) const {
         return static_cast<float>(x - oldX) / frameTime;
-
     }
+
+    [[nodiscard]] float getVerticalSpeed(const float frameTime) const {
+        return static_cast<float>(y - oldY) / frameTime;
+    }
+
+    int getVerticalDis() const { return y - oldY; }
 
     void draw() {
         DrawRectangle(x + GamePad::margin, y + GamePad::margin, width, height,

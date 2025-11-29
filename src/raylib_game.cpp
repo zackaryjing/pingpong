@@ -18,7 +18,6 @@
 #include "screens.hpp" // NOTE: Declares global (extern) variables and screens functions
 
 
-
 #include "logic/GamePad.hpp"
 
 
@@ -276,6 +275,11 @@ static void UpdateDrawFrame(void) {
     //----------------------------------------------------------------------------------
     // UpdateMusicStream(music);       // NOTE: Music keeps playing between
     // screens
+    if (IsWindowFocused()) {
+        HideCursor();
+    } else {
+        ShowCursor();
+    }
 
     if (!onTransition) {
         switch (currentScreen) {
@@ -285,8 +289,7 @@ static void UpdateDrawFrame(void) {
                 if (FinishLogoScreen())
                     TransitionToScreen(TITLE);
 
-            }
-            break;
+            } break;
             case TITLE: {
                 UpdateTitleScreen();
 
@@ -295,16 +298,14 @@ static void UpdateDrawFrame(void) {
                 else if (FinishTitleScreen() == 2)
                     TransitionToScreen(GAMEPLAY);
 
-            }
-            break;
+            } break;
             case OPTIONS: {
                 UpdateOptionsScreen();
 
                 if (FinishOptionsScreen())
                     TransitionToScreen(TITLE);
 
-            }
-            break;
+            } break;
             case GAMEPLAY: {
                 UpdateGameplayScreen();
 
@@ -313,16 +314,14 @@ static void UpdateDrawFrame(void) {
                 // else if (FinishGameplayScreen() == 2)
                 // TransitionToScreen(TITLE);
 
-            }
-            break;
+            } break;
             case ENDING: {
                 UpdateEndingScreen();
 
                 if (FinishEndingScreen() == 1)
                     TransitionToScreen(TITLE);
 
-            }
-            break;
+            } break;
             default:
                 break;
         }
