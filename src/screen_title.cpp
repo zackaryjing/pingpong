@@ -2,7 +2,7 @@
 *
 *   raylib - Advance Game template
 *
-*   Options Screen Functions Definitions (Init, Update, Draw, Unload)
+*   Title Screen Functions Definitions (Init, Update, Draw, Unload)
 *
 *   Copyright (c) 2014-2022 Ramon Santamaria (@raysan5)
 *
@@ -24,7 +24,7 @@
 **********************************************************************************************/
 
 #include "raylib.h"
-#include "screens.h"
+#include "screens.hpp"
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -33,37 +33,49 @@ static int framesCounter = 0;
 static int finishScreen = 0;
 
 //----------------------------------------------------------------------------------
-// Options Screen Functions Definition
+// Title Screen Functions Definition
 //----------------------------------------------------------------------------------
 
-// Options Screen Initialization logic
-void InitOptionsScreen(void)
+// Title Screen Initialization logic
+void InitTitleScreen(void)
 {
-    // TODO: Initialize OPTIONS screen variables here!
+    // TODO: Initialize TITLE screen variables here!
     framesCounter = 0;
     finishScreen = 0;
 }
 
-// Options Screen Update logic
-void UpdateOptionsScreen(void)
+// Title Screen Update logic
+void UpdateTitleScreen(void)
 {
-    // TODO: Update OPTIONS screen variables here!
+    // TODO: Update TITLE screen variables here!
+
+    // Press enter or tap to change to GAMEPLAY screen
+    if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
+    {
+        //finishScreen = 1;   // OPTIONS
+        finishScreen = 2;   // GAMEPLAY
+        PlaySound(fxCoin);
+    }
 }
 
-// Options Screen Draw logic
-void DrawOptionsScreen(void)
+// Title Screen Draw logic
+void DrawTitleScreen(void)
 {
-    // TODO: Draw OPTIONS screen here!
+    // TODO: Draw TITLE screen here!
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), GREEN);
+    Vector2 pos = { 20, 10 };
+    DrawTextEx(font, "TITLE SCREEN", pos, font.baseSize*3.0f, 4, DARKGREEN);
+    DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
 }
 
-// Options Screen Unload logic
-void UnloadOptionsScreen(void)
+// Title Screen Unload logic
+void UnloadTitleScreen(void)
 {
-    // TODO: Unload OPTIONS screen variables here!
+    // TODO: Unload TITLE screen variables here!
 }
 
-// Options Screen should finish?
-int FinishOptionsScreen(void)
+// Title Screen should finish?
+int FinishTitleScreen(void)
 {
     return finishScreen;
 }
